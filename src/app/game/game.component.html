@@ -1,0 +1,30 @@
+<GridLayout rows="auto, *, auto">
+  <StackLayout row="0" class="p-4 bg-gray-800 text-white">
+    <Label [text]="'Modo: ' + gameMode" class="text-lg"></Label>
+    <Label [text]="'Salud: ' + player.health" class="text-lg"></Label>
+    <Label [text]="'Radiación: ' + player.radiation" class="text-lg"></Label>
+    <Label [text]="'Ubicación: ' + world.currentLocation" class="text-lg"></Label>
+  </StackLayout>
+
+  <ScrollView row="1">
+    <StackLayout class="p-4">
+      <Label text="Acciones:" class="text-xl mt-4 mb-2"></Label>
+      <Button text="Explorar" (tap)="explore()" class="btn btn-primary m-1"></Button>
+      <Button text="Recolectar recursos" (tap)="collectResource('random')" class="btn btn-outline m-1"></Button>
+      <Button text="Craftear objeto" (tap)="craft('random')" class="btn btn-primary m-1"></Button>
+      <Button text="Luchar" (tap)="fight()" class="btn btn-danger m-1" [isEnabled]="currentEnemy !== null"></Button>
+      <Button text="Jugar minijuego" (tap)="playMinigame()" class="btn btn-success m-1"></Button>
+      
+      <Label text="Inventario:" class="text-xl mt-4 mb-2"></Label>
+      <ListView [items]="player.inventory" class="list-group">
+        <ng-template let-item="item">
+          <Label [text]="item" class="list-group-item"></Label>
+        </ng-template>
+      </ListView>
+    </StackLayout>
+  </ScrollView>
+
+  <StackLayout row="2" class="p-4 bg-gray-200">
+    <Label [text]="'Efity: ' + aiCompanion.getAdvice('general')" textWrap="true" class="text-center"></Label>
+  </StackLayout>
+</GridLayout>
